@@ -18,6 +18,7 @@
 		7AEBBB102746ADE50004955A /* Bearcat_NinjaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB0F2746ADE50004955A /* Bearcat_NinjaTests.swift */; };
 		7AEBBB1A2746ADE50004955A /* Bearcat_NinjaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB192746ADE50004955A /* Bearcat_NinjaUITests.swift */; };
 		7AEBBB1C2746ADE50004955A /* Bearcat_NinjaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB1B2746ADE50004955A /* Bearcat_NinjaUITestsLaunchTests.swift */; };
+		7AEBBB292746AF6A0004955A /* MainpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB282746AF6A0004955A /* MainpageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		7AEBBB152746ADE50004955A /* Bearcat NinjaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bearcat NinjaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AEBBB192746ADE50004955A /* Bearcat_NinjaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearcat_NinjaUITests.swift; sourceTree = "<group>"; };
 		7AEBBB1B2746ADE50004955A /* Bearcat_NinjaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearcat_NinjaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7AEBBB282746AF6A0004955A /* MainpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainpageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				7AEBBAFF2746ADE40004955A /* Main.storyboard */,
 				7AEBBB022746ADE50004955A /* Assets.xcassets */,
 				7AEBBB042746ADE50004955A /* LaunchScreen.storyboard */,
+				7AEBBB282746AF6A0004955A /* MainpageViewController.swift */,
 			);
 			path = "Bearcat Ninja";
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AEBBB292746AF6A0004955A /* MainpageViewController.swift in Sources */,
 				7AEBBAFC2746ADE40004955A /* GameScene.swift in Sources */,
 				7AEBBAFE2746ADE40004955A /* GameViewController.swift in Sources */,
 				7AEBBAF62746ADE40004955A /* AppDelegate.swift in Sources */,
