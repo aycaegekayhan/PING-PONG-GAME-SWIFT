@@ -19,6 +19,8 @@
 		7AEBBB1A2746ADE50004955A /* Bearcat_NinjaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB192746ADE50004955A /* Bearcat_NinjaUITests.swift */; };
 		7AEBBB1C2746ADE50004955A /* Bearcat_NinjaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB1B2746ADE50004955A /* Bearcat_NinjaUITestsLaunchTests.swift */; };
 		7AEBBB292746AF6A0004955A /* MainpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB282746AF6A0004955A /* MainpageViewController.swift */; };
+		7AEBBB2B2746B2CA0004955A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB2A2746B2CA0004955A /* SettingsViewController.swift */; };
+		7AEBBB2D2746B2E70004955A /* HighScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBB2C2746B2E70004955A /* HighScoresViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		7AEBBB192746ADE50004955A /* Bearcat_NinjaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearcat_NinjaUITests.swift; sourceTree = "<group>"; };
 		7AEBBB1B2746ADE50004955A /* Bearcat_NinjaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearcat_NinjaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7AEBBB282746AF6A0004955A /* MainpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainpageViewController.swift; sourceTree = "<group>"; };
+		7AEBBB2A2746B2CA0004955A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7AEBBB2C2746B2E70004955A /* HighScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoresViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 				7AEBBB022746ADE50004955A /* Assets.xcassets */,
 				7AEBBB042746ADE50004955A /* LaunchScreen.storyboard */,
 				7AEBBB282746AF6A0004955A /* MainpageViewController.swift */,
+				7AEBBB2A2746B2CA0004955A /* SettingsViewController.swift */,
+				7AEBBB2C2746B2E70004955A /* HighScoresViewController.swift */,
 			);
 			path = "Bearcat Ninja";
 			sourceTree = "<group>";
@@ -270,6 +276,8 @@
 				7AEBBB292746AF6A0004955A /* MainpageViewController.swift in Sources */,
 				7AEBBAFC2746ADE40004955A /* GameScene.swift in Sources */,
 				7AEBBAFE2746ADE40004955A /* GameViewController.swift in Sources */,
+				7AEBBB2D2746B2E70004955A /* HighScoresViewController.swift in Sources */,
+				7AEBBB2B2746B2CA0004955A /* SettingsViewController.swift in Sources */,
 				7AEBBAF62746ADE40004955A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
