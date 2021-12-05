@@ -7,16 +7,29 @@
 
 import UIKit
 
-class HighScoresViewController: UIViewController {
+class HighScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var highScoreTable: UITableView!
-    
     @IBOutlet var HighScores: UIView!
+    var highScoreValues = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        highScoreTable.delegate = self
+        highScoreTable.dataSource = self
+        
+        highScoreValues = ["152","188","212","245","267"]
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = highScoreValues[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return highScoreValues.count
     }
     
 }
