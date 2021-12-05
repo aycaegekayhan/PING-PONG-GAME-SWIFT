@@ -11,7 +11,8 @@ class HighScoresViewController: UIViewController {
     
     @IBOutlet weak var highScoreTable: UITableView!
     
-
+    @IBOutlet var HighScores: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

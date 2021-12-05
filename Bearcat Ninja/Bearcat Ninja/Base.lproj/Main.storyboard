@@ -64,6 +64,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="IDc-4J-fdb"/>
                     <connections>
+                        <outlet property="HighScores" destination="IFY-oo-qz6" id="qyO-4C-8XM"/>
                         <outlet property="highScoreTable" destination="L7s-xt-XB7" id="hMB-PR-May"/>
                     </connections>
                 </viewController>
