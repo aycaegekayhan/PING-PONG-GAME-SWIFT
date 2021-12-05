@@ -47,10 +47,25 @@
                     <view key="view" contentMode="scaleToFill" id="IFY-oo-qz6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="L7s-xt-XB7">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="rbQ-J7-uIz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="L7s-xt-XB7" firstAttribute="leading" secondItem="rbQ-J7-uIz" secondAttribute="leading" id="AX3-4a-gr7"/>
+                            <constraint firstItem="rbQ-J7-uIz" firstAttribute="trailing" secondItem="L7s-xt-XB7" secondAttribute="trailing" id="Qhv-Xp-Erv"/>
+                            <constraint firstItem="L7s-xt-XB7" firstAttribute="top" secondItem="rbQ-J7-uIz" secondAttribute="top" id="hm7-WR-YrP"/>
+                            <constraint firstItem="rbQ-J7-uIz" firstAttribute="bottom" secondItem="L7s-xt-XB7" secondAttribute="bottom" id="w0H-hK-b3u"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IDc-4J-fdb"/>
+                    <connections>
+                        <outlet property="highScoreTable" destination="L7s-xt-XB7" id="hMB-PR-May"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNb-JE-zdv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

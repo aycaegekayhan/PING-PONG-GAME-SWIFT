@@ -8,6 +8,9 @@
 import UIKit
 
 class HighScoresViewController: UIViewController {
+    
+    @IBOutlet weak var highScoreTable: UITableView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
