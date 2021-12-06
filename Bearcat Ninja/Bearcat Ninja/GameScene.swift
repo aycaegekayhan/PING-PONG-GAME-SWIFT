@@ -14,6 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     private var obstacle: SKShapeNode!
+    private var player: SKNode!
     // initialize obstacle array
     
     var baseGround: SKShapeNode!
@@ -22,11 +23,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var nodeCount = 0
     
     var timer = Timer()
-    var time = 1
+    var time = 2
     
     var initLocation = CGPoint(x: 0, y: 0)
     
+    var obstacleSizes = [100,150,200,250,300,350]
+    var colorSelections = [UIColor.systemGreen, UIColor.orange, UIColor.yellow, UIColor.systemPink, UIColor.systemPurple, UIColor.systemCyan, UIColor.systemMint, UIColor.systemBrown]
+    
     override func didMove(to view: SKView) {
+        player = (self.childNode(withName: "player") as! SKNode)
         
         let background = SKSpriteNode(imageNamed: "3")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -68,7 +73,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         time = time - 1
         if (time == 0){
             
-            
             if (flag) {
                 // RIGHT OBSTACLE
                 initLocation = CGPoint(x: 250, y: CGFloat(frame.midY))
@@ -81,28 +85,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 //obstacle.fillColor = .systemBrown
                 flag = true
             }
-            
-            time = 1
-            
+            time = 2
             nodeCount+=1
+            let randomSize = Int.random(in: 0..<obstacleSizes.count)       //making obstacle size random
+            let obstacleWidth = obstacleSizes[randomSize]
             
-            let obstacleSize = CGSize(width: 150, height: 40.0)
+            let randomColor = Int.random(in: 0..<colorSelections.count)       //making obstacle color random
+            
+            let obstacleSize = CGSize(width: CGFloat(obstacleWidth), height: 40.0)
             obstacle = SKShapeNode(rectOf: obstacleSize, cornerRadius: CGFloat(10))
             obstacle.name = "obstacle"+String(nodeCount)
             obstacle.position = initLocation
             obstacle.zPosition = 1
-            obstacle.fillColor = .systemMint
-            
+            obstacle.fillColor = colorSelections[randomColor]
             
             obstacle.physicsBody = SKPhysicsBody(rectangleOf: obstacleSize)
             obstacle.physicsBody?.affectedByGravity = false
-            obstacle.physicsBody?.collisionBitMask = 2
+            obstacle.physicsBody?.allowsRotation = false
+            obstacle.physicsBody?.collisionBitMask = 1
             obstacle.physicsBody?.categoryBitMask = 1
             obstacle.physicsBody?.contactTestBitMask = 2
             
             self.addChild(obstacle)
-            obstacle.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -50))
-
+            obstacle.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -obstacleWidth/3))
         }
     }
     
@@ -131,15 +136,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+        for touch in touches {
+            let loc = touch.location(in: self)
+            if (loc.x < 0) {
+                player.physicsBody?.applyImpulse(CGVector(dx: -50, dy: 0))
+            }
+            else {
+                player.physicsBody?.applyImpulse(CGVector(dx: 50, dy: 0))
+            }
         }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
