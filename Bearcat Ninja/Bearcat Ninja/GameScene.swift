@@ -100,6 +100,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let firstContact = contact.bodyA.node?.name
         let secondContact = contact.bodyB.node?.name
+        print(firstContact, secondContact)
+        if ((firstContact == "baseGround" && secondContact!.contains("obstacle")) || (firstContact!.contains("obstacle") && secondContact == "baseGround")) {
+            if (firstContact!.contains("obstacle")) {
+                contact.bodyA.node?.removeFromParent()
+            } else {
+                contact.bodyB.node?.removeFromParent()
+            }
+        }
         
         if ((firstContact == "player" && (secondContact == "baseGround" || secondContact!.contains("obstacle"))) || ((firstContact == "baseGround" || firstContact!.contains("obstacle")) && secondContact == "player" )) {
             onGround = true
