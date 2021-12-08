@@ -48,13 +48,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseGround.physicsBody = SKPhysicsBody(rectangleOf: baseSize)
         baseGround.physicsBody!.affectedByGravity = false
         baseGround.physicsBody?.isDynamic = false
-        baseGround.physicsBody?.collisionBitMask = 2
+        baseGround.physicsBody?.collisionBitMask = 3
         baseGround.physicsBody?.categoryBitMask = 1
         baseGround.physicsBody?.angularDamping = 0
         baseGround.physicsBody?.linearDamping = 0
         baseGround.physicsBody?.friction = 0
         baseGround.physicsBody?.restitution = 0
-        baseGround.physicsBody?.contactTestBitMask = 2
+        baseGround.physicsBody?.contactTestBitMask = 3
         baseGround.name = "baseGround"
         baseGround.zPosition = 2
         
