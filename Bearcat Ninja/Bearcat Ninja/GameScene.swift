@@ -30,8 +30,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacleSizes = [100,150,200,250,300,350]
     var colorSelections = [UIColor.systemGreen, UIColor.orange, UIColor.yellow, UIColor.systemPink, UIColor.systemPurple, UIColor.systemCyan, UIColor.systemMint, UIColor.systemBrown]
     
+    var onGround = true
     override func didMove(to view: SKView) {
-        player = (self.childNode(withName: "player") as! SKNode)
+        player = (self.childNode(withName: "player")!)
         
         let background = SKSpriteNode(imageNamed: "3")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -65,8 +66,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.name = "gameArea"
         
         self.addChild(baseGround)
+        
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        let longTapRecognizer: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
+        longTapRecognizer.minimumPressDuration = 0.2
+        // tapRecognizer.cancelsTouchesInView = false // can be added later
+
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapRecognizer)
+        view.addGestureRecognizer(longTapRecognizer)
+
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameScene.createObstacle), userInfo: nil, repeats: true)
         
+    }
+    
+    @objc func handleLongPress(recognizer: UIGestureRecognizer) {
+        if recognizer.state == .began {
+            print("Move! (location: \(recognizer.location(in: nil))")
+        }
+    }
+
+    @objc func handleTap(recognizer: UIGestureRecognizer) {
+        print("Jump! (location: \(recognizer.location(in: nil))")
+        if (onGround) {
+            onGround = false
+            player.physicsBody?.applyImpulse(CGVector(dx:0,dy:250))
+        } else {
+            print("we're already on air")
+        }
+
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let firstContact = contact.bodyA.node?.name
+        let secondContact = contact.bodyB.node?.name
+        
+        if ((firstContact == "player" && (secondContact == "baseGround" || secondContact!.contains("obstacle"))) || ((firstContact == "baseGround" || firstContact!.contains("obstacle")) && secondContact == "player" )) {
+            onGround = true
+        }
+
     }
     
     @objc func createObstacle() {
@@ -111,57 +149,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let loc = touch.location(in: self)
-            if (loc.x < 0) {
-                player.physicsBody?.applyImpulse(CGVector(dx: -50, dy: 0))
-            }
-            else {
-                player.physicsBody?.applyImpulse(CGVector(dx: 50, dy: 0))
-            }
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
 }
