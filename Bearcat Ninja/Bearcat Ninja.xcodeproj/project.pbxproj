@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47F3F64A275DB7D10051296B /* LavaTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 47F3F649275DB7D10051296B /* LavaTileSet.sks */; };
+		47F3F6502761BFC10051296B /* GameMusicBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47F3F64F2761BFC10051296B /* GameMusicBackground.mp3 */; };
 		7AEBBAF62746ADE40004955A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBAF52746ADE40004955A /* AppDelegate.swift */; };
 		7AEBBAF82746ADE40004955A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AEBBAF72746ADE40004955A /* GameScene.sks */; };
 		7AEBBAFA2746ADE40004955A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AEBBAF92746ADE40004955A /* Actions.sks */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		47F3F649275DB7D10051296B /* LavaTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LavaTileSet.sks; sourceTree = "<group>"; };
+		47F3F64F2761BFC10051296B /* GameMusicBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameMusicBackground.mp3; sourceTree = "<group>"; };
 		7AEBBAF22746ADE40004955A /* Bearcat Ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bearcat Ninja.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AEBBAF52746ADE40004955A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AEBBAF72746ADE40004955A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				7AEBBAFD2746ADE40004955A /* GameViewController.swift */,
 				7AEBBAFF2746ADE40004955A /* Main.storyboard */,
 				7AEBBB022746ADE50004955A /* Assets.xcassets */,
+				47F3F64F2761BFC10051296B /* GameMusicBackground.mp3 */,
 				7AEBBB042746ADE50004955A /* LaunchScreen.storyboard */,
 				7AEBBB282746AF6A0004955A /* MainpageViewController.swift */,
 				7AEBBB2A2746B2CA0004955A /* SettingsViewController.swift */,
@@ -252,6 +255,7 @@
 				7AEBBAF82746ADE40004955A /* GameScene.sks in Resources */,
 				7AEBBB032746ADE50004955A /* Assets.xcassets in Resources */,
 				7AEBBB062746ADE50004955A /* LaunchScreen.storyboard in Resources */,
+				47F3F6502761BFC10051296B /* GameMusicBackground.mp3 in Resources */,
 				7AEBBAFA2746ADE40004955A /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
