@@ -83,11 +83,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func handleLongPress(recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
             print("Move! (location: \(recognizer.location(in: nil))")
+            let midX = (frame.maxX*1.04) / 2
+            if (recognizer.location(in: nil).x < midX) {
+                player.physicsBody?.applyImpulse(CGVector(dx:-100,dy:0))
+            }
+            else {
+                player.physicsBody?.applyImpulse(CGVector(dx:100,dy:0))
+            }
         }
     }
 
     @objc func handleTap(recognizer: UIGestureRecognizer) {
-        print("Jump! (location: \(recognizer.location(in: nil))")
         if (onGround) {
             onGround = false
             player.physicsBody?.applyImpulse(CGVector(dx:0,dy:250))
@@ -100,7 +106,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let firstContact = contact.bodyA.node?.name
         let secondContact = contact.bodyB.node?.name
-        print(firstContact, secondContact)
         if ((firstContact == "baseGround" && secondContact!.contains("obstacle")) || (firstContact!.contains("obstacle") && secondContact == "baseGround")) {
             if (firstContact!.contains("obstacle")) {
                 contact.bodyA.node?.removeFromParent()
