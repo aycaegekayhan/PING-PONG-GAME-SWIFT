@@ -68,35 +68,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(baseGround)
         
         let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-        let longTapRecognizer: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
-        longTapRecognizer.minimumPressDuration = 0.2
         // tapRecognizer.cancelsTouchesInView = false // can be added later
 
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapRecognizer)
-        view.addGestureRecognizer(longTapRecognizer)
 
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameScene.createObstacle), userInfo: nil, repeats: true)
         
     }
     
-    @objc func handleLongPress(recognizer: UIGestureRecognizer) {
-        if recognizer.state == .began {
-            print("Move! (location: \(recognizer.location(in: nil))")
-            let midX = (frame.maxX*1.04) / 2
-            if (recognizer.location(in: nil).x < midX) {
-                player.physicsBody?.applyImpulse(CGVector(dx:-100,dy:0))
-            }
-            else {
-                player.physicsBody?.applyImpulse(CGVector(dx:100,dy:0))
-            }
-        }
-    }
-
     @objc func handleTap(recognizer: UIGestureRecognizer) {
         if (onGround) {
             onGround = false
-            player.physicsBody?.applyImpulse(CGVector(dx:0,dy:250))
+            let midX = (frame.maxX*1.04) / 2
+            if (recognizer.location(in: nil).x < midX) {
+                let moveAction = SKAction.moveBy(x: CGFloat(-250), y: CGFloat(350), duration: 0.3)
+                player.run(moveAction)
+            }
+            else {
+                let moveAction = SKAction.moveBy(x: CGFloat(250), y: CGFloat(350), duration: 0.3)
+                player.run(moveAction)
+            }
         } else {
             print("we're already on air")
         }
@@ -126,13 +118,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if (flag) {
                 // RIGHT OBSTACLE
-                initLocation = CGPoint(x: 250, y: CGFloat(frame.midY))
+                initLocation = CGPoint(x: 250, y: CGFloat(frame.maxY*0.96))
                 //obstacle.fillColor = .systemMint
                 flag = false
 
             } else {
                 // LEFT OBSTACLE
-                initLocation = CGPoint(x: -250, y: CGFloat(frame.midY))
+                initLocation = CGPoint(x: -250, y: CGFloat(frame.maxY*0.96))
                 //obstacle.fillColor = .systemBrown
                 flag = true
             }
