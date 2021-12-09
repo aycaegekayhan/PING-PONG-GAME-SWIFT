@@ -17,5 +17,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func BrightnessSlider(_ sender: UISlider) {
+        BrightnessLabel.text = String(sender.value)
+        UIScreen.main.brightness = CGFloat(sender.value)
     }
 }
