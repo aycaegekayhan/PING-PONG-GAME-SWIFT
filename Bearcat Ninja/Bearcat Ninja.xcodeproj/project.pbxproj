@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		47F3F64A275DB7D10051296B /* LavaTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 47F3F649275DB7D10051296B /* LavaTileSet.sks */; };
-		47F3F64C2761A0870051296B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F3F64B2761A0870051296B /* MenuScene.swift */; };
 		7AEBBAF62746ADE40004955A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBBAF52746ADE40004955A /* AppDelegate.swift */; };
 		7AEBBAF82746ADE40004955A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AEBBAF72746ADE40004955A /* GameScene.sks */; };
 		7AEBBAFA2746ADE40004955A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AEBBAF92746ADE40004955A /* Actions.sks */; };
@@ -44,7 +43,6 @@
 
 /* Begin PBXFileReference section */
 		47F3F649275DB7D10051296B /* LavaTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LavaTileSet.sks; sourceTree = "<group>"; };
-		47F3F64B2761A0870051296B /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		7AEBBAF22746ADE40004955A /* Bearcat Ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bearcat Ninja.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AEBBAF52746ADE40004955A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AEBBAF72746ADE40004955A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				7AEBBB2A2746B2CA0004955A /* SettingsViewController.swift */,
 				7AEBBB2C2746B2E70004955A /* HighScoresViewController.swift */,
 				47F3F649275DB7D10051296B /* LavaTileSet.sks */,
-				47F3F64B2761A0870051296B /* MenuScene.swift */,
 			);
 			path = "Bearcat Ninja";
 			sourceTree = "<group>";
@@ -283,7 +280,6 @@
 				7AEBBB292746AF6A0004955A /* MainpageViewController.swift in Sources */,
 				7AEBBAFC2746ADE40004955A /* GameScene.swift in Sources */,
 				7AEBBAFE2746ADE40004955A /* GameViewController.swift in Sources */,
-				47F3F64C2761A0870051296B /* MenuScene.swift in Sources */,
 				7AEBBB2D2746B2E70004955A /* HighScoresViewController.swift in Sources */,
 				7AEBBB2B2746B2CA0004955A /* SettingsViewController.swift in Sources */,
 				7AEBBAF62746ADE40004955A /* AppDelegate.swift in Sources */,
