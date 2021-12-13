@@ -19,6 +19,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var player: SKNode!
     private var joystick: SKNode!
     private var knob: SKNode!
+    
+    var joystickMoved = false
+    var knobPos : CGFloat = 35.0
     var nodeCount = 0
     
     var onGround = true
@@ -34,8 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
         player = (self.childNode(withName: "player")!)
-        joystick = (self.childNode(withName: "joystick")!)
-        knob = (self.childNode(withName: "knob"))
+        joystick = (self.childNode(withName: "SKJoystick")!)
+        knob = (joystick.childNode(withName: "knob"))
         
         let background = SKSpriteNode(imageNamed: "3")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -168,6 +171,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.addChild(obstacle)
             obstacle.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -obstacleWidth/3))
+        }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: joystick!)
+            joystickMoved = knob.frame.contains(location)
+        }
+    }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !joystickMoved {return}
+        
+        for touch in touches {
+            let pos = touch.location(in: joystick)
+            if knobPos > abs(pos.x) {
+                knob.position.x = pos.x
+            } else {
+                if (pos.x < 0) {
+                    knob.position.x = -knobPos
+                } else {
+                    knob.position.x = knobPos
+                }
+            }
         }
     }
     
