@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var initLocation = CGPoint(x: 0, y: 0)
     
-    var obstacleSizes = [100,150,200,250,300,350]
+    var obstacleSizes = [150,200,250,300]
     var colorSelections = [UIColor.systemGreen, UIColor.orange, UIColor.yellow, UIColor.systemPink, UIColor.systemPurple, UIColor.systemCyan, UIColor.systemMint, UIColor.systemBrown]
     
     var onGround = true
@@ -96,6 +96,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
+        //Once we detect the contact point of the 2 bodies, we determine which body is the one that is colliding by checking their names. Then, we checked its CGPoints y position. The Y position can be compared to the other body's Y pos to know exactly which side is colliding.
+        
+        // if bodyA's Y position >= bodyB's x position, bodyA is on top of bodyB and if not, it's underneath bodyB.
+        
+        // We need to determine which side is colliding, because we're changing the "onGround" variable. If the player collides a ground from "TOP" then it can jump again. However, if it collides to a node from another-side, it shall not jump. Otherwise bugs occur, and player jumps several times in a row.
+        
         let firstContact = contact.bodyA.node?.name
         let secondContact = contact.bodyB.node?.name
         if ((firstContact == "baseGround" && secondContact!.contains("obstacle")) || (firstContact!.contains("obstacle") && secondContact == "baseGround")) {
@@ -105,9 +112,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 contact.bodyB.node?.removeFromParent()
             }
         }
+        if ((firstContact == "player" && (secondContact == "baseGround" || secondContact!.contains("obstacle")))) {
+            if (contact.bodyA.node!.position.y >= contact.bodyB.node!.position.y) {
+                onGround = true
+            }
+        }
         
-        if ((firstContact == "player" && (secondContact == "baseGround" || secondContact!.contains("obstacle"))) || ((firstContact == "baseGround" || firstContact!.contains("obstacle")) && secondContact == "player" )) {
-            onGround = true
+        else if ((firstContact == "baseGround" || firstContact!.contains("obstacle")) && secondContact == "player" ) {
+            if (contact.bodyA.node!.position.y <= contact.bodyB.node!.position.y) {
+                onGround = true
+            }
         }
 
     }
