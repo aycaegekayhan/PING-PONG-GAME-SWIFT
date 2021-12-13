@@ -14,25 +14,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     private var obstacle: SKShapeNode!
+    private var baseGround: SKShapeNode!
+
     private var player: SKNode!
-    // initialize obstacle array
-    
-    var baseGround: SKShapeNode!
-    
-    var flag = false
+    private var joystick: SKNode!
+    private var knob: SKNode!
     var nodeCount = 0
     
-    var timer = Timer()
-    var time = 2
+    var onGround = true
+    var flag = false
     
     var initLocation = CGPoint(x: 0, y: 0)
-    
     var obstacleSizes = [150,200,250,300]
     var colorSelections = [UIColor.systemGreen, UIColor.orange, UIColor.yellow, UIColor.systemPink, UIColor.systemPurple, UIColor.systemCyan, UIColor.systemMint, UIColor.systemBrown]
-    
-    var onGround = true
+ 
+    var timer = Timer()
+    var time = 2
+    // initialize obstacle array
+
     override func didMove(to view: SKView) {
         player = (self.childNode(withName: "player")!)
+        joystick = (self.childNode(withName: "joystick")!)
+        knob = (self.childNode(withName: "knob"))
         
         let background = SKSpriteNode(imageNamed: "3")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
