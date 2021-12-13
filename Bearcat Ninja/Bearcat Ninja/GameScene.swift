@@ -88,15 +88,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func handleTap(recognizer: UIGestureRecognizer) {
         if (onGround) {
             onGround = false
-            let midX = (frame.maxX*1.04) / 2
-            if (recognizer.location(in: nil).x < midX) {
-                let moveAction = SKAction.moveBy(x: CGFloat(-250), y: CGFloat(350), duration: 0.3)
-                player.run(moveAction)
-            }
-            else {
-                let moveAction = SKAction.moveBy(x: CGFloat(250), y: CGFloat(350), duration: 0.3)
-                player.run(moveAction)
-            }
+            let moveAction = SKAction.moveBy(x: 0, y: CGFloat(350), duration: 0.3)
+            player.run(moveAction)
+
         } else {
             print("we're already on air")
         }
@@ -195,6 +189,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     knob.position.x = knobLimit
                 }
             }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for _ in touches {
+            let centralize = SKAction.move(to: CGPoint(x: 0, y: 0), duration: 0.1)
+            centralize.timingMode = .easeIn
+            knob.run(centralize)
+            joystickMoved = false
         }
     }
     
