@@ -21,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var knob: SKNode!
     
     var joystickMoved = false
-    var knobPos : CGFloat = 35.0
+    var knobLimit : CGFloat = 35.0
     var nodeCount = 0
     
     var onGround = true
@@ -33,8 +33,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
  
     var timer = Timer()
     var time = 2
-    // initialize obstacle array
 
+    var timeInterval:TimeInterval = 0
+    var playerSpeed = 5.0
+    
     override func didMove(to view: SKView) {
         player = (self.childNode(withName: "player")!)
         joystick = (self.childNode(withName: "SKJoystick")!)
@@ -184,16 +186,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         for touch in touches {
             let pos = touch.location(in: joystick)
-            if knobPos > abs(pos.x) {
+            if knobLimit > abs(pos.x) {
                 knob.position.x = pos.x
             } else {
                 if (pos.x < 0) {
-                    knob.position.x = -knobPos
+                    knob.position.x = -knobLimit
                 } else {
-                    knob.position.x = knobPos
+                    knob.position.x = knobLimit
                 }
             }
         }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        let dTime = currentTime - timeInterval
+        timeInterval = currentTime
+        
+        let xPos = Double(knob.position.x)
+        let vector = CGVector(dx: dTime * xPos * playerSpeed, dy: 0)
+        let act = SKAction.move(by:vector,duration: 0)
+        player.run(act)
     }
     
 }
