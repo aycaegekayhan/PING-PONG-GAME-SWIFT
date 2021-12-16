@@ -21,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var knob: SKNode!
     
     var joystickMoved = false
-    var knobLimit : CGFloat = 35.0
+    var knobLimit : CGFloat = 50.0
     var nodeCount = 0
     
     var onGround = true
@@ -35,7 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var time = 2
 
     var timeInterval:TimeInterval = 0
-    var playerSpeed = 5.0
+    var playerSpeed = 10.0
     
     override func didMove(to view: SKView) {
         player = (self.childNode(withName: "player")!)
