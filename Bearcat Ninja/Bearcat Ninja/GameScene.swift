@@ -15,7 +15,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var spinnyNode : SKShapeNode?
     private var obstacle: SKShapeNode!
     private var baseGround: SKShapeNode!
-
+    
+    private var coin : SKSpriteNode!
+    
     private var player: SKNode!
     private var joystick: SKNode!
     private var knob: SKNode!
@@ -23,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var joystickMoved = false
     var knobLimit : CGFloat = 50.0
     var nodeCount = 0
+    var coinCount = 0
     
     var onGround = true
     var flag = false
@@ -34,6 +37,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timer = Timer()
     var time = 2
 
+    var coinRemoveTimer = Timer()
+    var coinRemoveTime = 2
+    
     var timeInterval:TimeInterval = 0
     var playerSpeed = 10.0
     
@@ -83,6 +89,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameScene.createObstacle), userInfo: nil, repeats: true)
         
+        view.showsPhysics = true
+        
     }
     
     @objc func handleTap(recognizer: UIGestureRecognizer) {
@@ -114,6 +122,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 contact.bodyB.node?.removeFromParent()
             }
         }
+        
+        if ((firstContact == "baseGround" && secondContact!.contains("coin")) || (firstContact!.contains("coin") && secondContact == "baseGround")) {
+            if (firstContact!.contains("coin")) {
+                contact.bodyA.node?.removeFromParent()
+            } else {
+                contact.bodyB.node?.removeFromParent()
+            }
+        }
+
         if ((firstContact == "player" && (secondContact == "baseGround" || secondContact!.contains("obstacle")))) {
             if (contact.bodyA.node!.position.y >= contact.bodyB.node!.position.y) {
                 onGround = true
@@ -123,6 +140,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if ((firstContact == "baseGround" || firstContact!.contains("obstacle")) && secondContact == "player" ) {
             if (contact.bodyA.node!.position.y <= contact.bodyB.node!.position.y) {
                 onGround = true
+            }
+        }
+        
+        if ((firstContact == "player" && secondContact!.contains("coin")) || (firstContact!.contains("coin") && secondContact == "player")) {
+            if (firstContact!.contains("coin")) {
+                contact.bodyA.node?.removeFromParent()
+            } else {
+                contact.bodyB.node?.removeFromParent()
             }
         }
 
@@ -164,11 +189,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacle.physicsBody?.collisionBitMask = 1
             obstacle.physicsBody?.categoryBitMask = 1
             obstacle.physicsBody?.contactTestBitMask = 2
-            
+            generateCoin(obs: obstacle)
             self.addChild(obstacle)
             obstacle.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -obstacleWidth/3))
         }
     }
+    
+    @objc func generateCoin(obs: SKShapeNode) {
+        
+        let chance = Int.random(in: 0...2)     //making obstacle size random
+        if (chance == 1) {
+            coinCount+=1
+            let image = UIImage(named: "spr_coin")
+            let texture = SKTexture(image: image!)
+            coin = SKSpriteNode(texture: texture)
+            coin.size.height *= 3
+            coin.size.width *= 3
+            
+            coin.name = "coin"+String(coinCount)
+            coin.position = CGPoint(x:obs.position.x, y:obs.position.y + 20)
+            coin.zPosition = 1
+                
+            coin.physicsBody = SKPhysicsBody(rectangleOf: coin.size)
+            coin.physicsBody?.affectedByGravity = false
+            coin.physicsBody?.allowsRotation = false
+            coin.physicsBody?.collisionBitMask = 1
+            coin.physicsBody?.categoryBitMask = 1
+            coin.physicsBody?.contactTestBitMask = 2
+                
+            self.addChild(coin)
+            coin.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -coin.size.width/2))
+            
+            coinRemoveTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(GameScene.removeCoin), userInfo: coin.name, repeats: false) // the coins will stay for 6 seconds
+
+        } else {
+            return
+        }
+    }
+    
+    @objc func removeCoin(sender:Timer) {
+        self.childNode(withName: sender.userInfo as! String)!.removeFromParent()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: joystick!)
