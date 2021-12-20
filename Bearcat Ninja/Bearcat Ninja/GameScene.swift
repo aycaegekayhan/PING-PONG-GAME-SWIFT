@@ -11,7 +11,8 @@ import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    private var label : SKLabelNode?
+    private var scoreBoardLabel : SKLabelNode!
+    
     private var spinnyNode : SKShapeNode?
     private var obstacle: SKShapeNode!
     private var baseGround: SKShapeNode!
@@ -43,10 +44,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timeInterval:TimeInterval = 0
     var playerSpeed = 10.0
     
+    var score = 0
     override func didMove(to view: SKView) {
         player = (self.childNode(withName: "player")!)
         joystick = (self.childNode(withName: "SKJoystick")!)
         knob = (joystick.childNode(withName: "knob"))
+        scoreBoardLabel = ((self.childNode(withName: "scoreBoardLabel")) as! SKLabelNode)
         
         let background = SKSpriteNode(imageNamed: "3")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -144,6 +147,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if ((firstContact == "player" && secondContact!.contains("coin")) || (firstContact!.contains("coin") && secondContact == "player")) {
+            score += 1
+            scoreBoardLabel.text = String(score)
+            
             if (firstContact!.contains("coin")) {
                 contact.bodyA.node?.removeFromParent()
             } else {
@@ -220,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(coin)
             coin.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -coin.size.width/2))
             
-            coinRemoveTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(GameScene.removeCoin), userInfo: coin.name, repeats: false) // the coins will stay for 6 seconds
+            coinRemoveTimer = Timer.scheduledTimer(timeInterval: 9, target: self, selector: #selector(GameScene.removeCoin), userInfo: coin.name, repeats: false) // the coins will stay for 6 seconds
 
         } else {
             return
@@ -228,7 +234,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func removeCoin(sender:Timer) {
-        self.childNode(withName: sender.userInfo as! String)!.removeFromParent()
+        if(self.childNode(withName: sender.userInfo as! String) != nil ) {
+            self.childNode(withName: sender.userInfo as! String)!.removeFromParent()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
